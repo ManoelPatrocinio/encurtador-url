@@ -1,6 +1,7 @@
 import express from 'express'
 import { URLController } from './controller/URLController'
 import { MongoConnection } from './database/MongoConnection'
+import cors from 'cors';
 import 'dotenv/config'
 const PORT = process.env.PORT || 3333;
 
@@ -9,6 +10,7 @@ api.use(express.json())
 
 const database = new MongoConnection()
 database.connect()
+api.use(cors())
 
 const urlController = new URLController()
 api.post('/shorten', urlController.shorten)
